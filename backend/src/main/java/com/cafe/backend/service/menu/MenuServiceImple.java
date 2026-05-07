@@ -1,4 +1,4 @@
-package com.cafe.backend.service.Menu;
+package com.cafe.backend.service.menu;
 
 import com.cafe.backend.dtos.menu.MenuSearchRequest;
 import com.cafe.backend.dtos.menu.MenuSearchResponse;
@@ -18,6 +18,7 @@ public class MenuServiceImple implements MenuService {
 
     @Override
     public MenuItem createMenuItem(MenuItem menuItem) {
+
         return menuRepository.save(menuItem);
     }
 
@@ -61,6 +62,33 @@ public class MenuServiceImple implements MenuService {
         }
 
         return new MenuSearchResponse(results, keyword);
+
+    }
+
+/*      ----------------------------------------
+        UPDATE OPERATION
+        1) Look up the item by ID in the DataBase
+        2) If not found -> throw an exception (item doesn't exist, can't update)
+        3) If found -> overwrite its fields with new values from request
+        4) save the updated item back to the database
+        5) Return the saved item.
+
+*/
+
+
+    @Override
+    public MenuItem updateMenuItem(Long id, MenuItem updatedItem) {
+
+        //step 1: Find Existing item
+        MenuItem existingItem = menuRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException(("Menu Item not found!")));
+
+        //step 2:
+        existingItem.setItemName(updatedItem.getItemName());
+        existingItem.setPrice(updatedItem.getPrice());
+        existingItem.setCategory(updatedItem.getCategory());
+        existingItem.setDescription(updatedItem.getDescription());
+        return menuRepository.save(existingItem);
 
     }
 

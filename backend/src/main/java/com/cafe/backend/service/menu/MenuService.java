@@ -1,4 +1,4 @@
-package com.cafe.backend.service.Menu;
+package com.cafe.backend.service.menu;
 
 import com.cafe.backend.dtos.menu.MenuSearchRequest;
 import com.cafe.backend.dtos.menu.MenuSearchResponse;
@@ -8,6 +8,8 @@ public interface MenuService {
 
     MenuItem createMenuItem(MenuItem menuItem);
 
-    public MenuSearchResponse search(MenuSearchRequest request);
+    MenuSearchResponse search(MenuSearchRequest request);
 //    MenuItem findByName(String name);
+
+    MenuItem updateMenuItem(Long id, MenuItem updatedItem);
 }

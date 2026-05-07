@@ -3,19 +3,16 @@ package com.cafe.backend.controllers;
 import com.cafe.backend.dtos.menu.MenuSearchRequest;
 import com.cafe.backend.dtos.menu.MenuSearchResponse;
 import com.cafe.backend.entities.MenuItem;
-import com.cafe.backend.service.Menu.MenuService;
-import com.cafe.backend.service.Menu.MenuServiceImple;
-import org.apache.coyote.Response;
+import com.cafe.backend.service.menu.MenuServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/menu")
 public class MenuController {
@@ -28,13 +25,14 @@ public class MenuController {
         return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
     }
 
+
     @GetMapping
     public ResponseEntity<List<MenuItem>> getAllMenuItems(){
         List<MenuItem> items = menuService.getAllMenuItems();
         return ResponseEntity.ok(items);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<MenuItem> getMenuItemById(@PathVariable Long id){
         Optional<MenuItem> item = menuService.getMenuItemById(id);
         if(item.isPresent()){
@@ -57,7 +55,7 @@ public class MenuController {
     }
 
     // 🔍 GET-based quick search (just a keyword in URL)
-// GET /api/menu-items/search?keyword=choc
+// GET /menu/search?keyword=choc
     @GetMapping("/search")
     public ResponseEntity<MenuSearchResponse> quickSearch(@RequestParam String keyword){
         MenuSearchRequest request = new MenuSearchRequest();
@@ -66,4 +64,9 @@ public class MenuController {
         return ResponseEntity.ok(menuService.search(request));
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<MenuItem> updateMenuItem(@PathVariable Long id, @RequestBody MenuItem menuItem){
+        MenuItem updated = menuService.updateMenuItem(id, menuItem);
+        return ResponseEntity.ok(updated);
+    }
 }
