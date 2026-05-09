@@ -1,0 +1,237 @@
+/* Container */
+.table-container {
+  overflow-x: auto;
+  border: 1px solid #fcd9a8;
+  border-radius: 12px;
+}
+
+/* Table */
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+/* Table Header */
+.menu-table thead {
+  background-color: #fff3e0;
+  color: #7c4700;
+}
+
+.menu-table th {
+  padding: 12px 16px;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Table Rows */
+.menu-table td {
+  padding: 12px 16px;
+  border-top: 1px solid #fce7c5;
+}
+
+.menu-table tbody tr:hover {
+  background-color: #fff8ef;
+}
+
+/* Item Info */
+.item-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Image */
+.item-image,
+.default-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.item-image {
+  object-fit: cover;
+}
+
+.default-image {
+  background-color: #fde6bf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* Item Name */
+.item-name {
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+/* Description */
+.item-description {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+  max-width: 200px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Category Badge */
+.category-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Category Colors */
+.coffee-badge {
+  background-color: #fde6bf;
+  color: #7c4700;
+}
+
+.tea-badge {
+  background-color: #d7f5dc;
+  color: #1b5e20;
+}
+
+.cold-badge {
+  background-color: #d6ecff;
+  color: #0d47a1;
+}
+
+.quick-badge {
+  background-color: #fff4cc;
+  color: #8a6d00;
+}
+
+.dessert-badge {
+  background-color: #ffd6ec;
+  color: #ad1457;
+}
+
+.meal-badge {
+  background-color: #ffe0cc;
+  color: #bf360c;
+}
+
+.default-badge {
+  background-color: #eeeeee;
+  color: #555;
+}
+
+/* Price */
+.price {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Status Badge */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.available {
+  background-color: #d7f5dc;
+  color: #1b5e20;
+}
+
+.unavailable {
+  background-color: #eeeeee;
+  color: #666;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Edit Button */
+.edit-btn {
+  background-color: #fde6bf;
+  color: #7c4700;
+}
+
+.edit-btn:hover {
+  background-color: #fbd18a;
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #ffd6d6;
+  color: #c62828;
+}
+
+.delete-btn:hover {
+  background-color: #ffb3b3;
+}
+
+/* Loading */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-row {
+  height: 64px;
+  background-color: #f2f2f2;
+  border-radius: 12px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 60px;
+  margin-bottom: 16px;
+}
+
+.empty-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.empty-text {
+  font-size: 14px;
+}
+
