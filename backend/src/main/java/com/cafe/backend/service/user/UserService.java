@@ -1,6 +1,9 @@
 package com.cafe.backend.service.user;
 
+import com.cafe.backend.dtos.auth.RegisterRequest;
+import com.cafe.backend.dtos.auth.RegisterResponse;
 import com.cafe.backend.entities.User;
+import com.cafe.backend.enums.UserRole;
 import com.cafe.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,16 +15,37 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
-    public String register(User user) {
+    public RegisterResponse register(RegisterRequest request) {
 
-        Optional<User> savedUser = userRepo.findByEmail(user.getEmail());
 
-        if(savedUser.isPresent()) {
-            return "User already exists";
+
+        //Checking if email already registered
+        if(userRepo.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("Email already exists: "+ request.getEmail());
         }
-            userRepo.save(user);
 
-        return "User registered successfully";
+        if(userRepo.existsByPhone(request.getPhone())) {
+            throw new RuntimeException("Phone already exists: "+ request.getPhone());
+        }
+
+        User user = new User();
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setEmail(request.getEmail());
+        user.setPhone(request.getPhone());
+        user.setRole(UserRole.CUSTOMER);
+        user.setPassword(request.getPassword());
+
+        User saved = userRepo.save(user);
+
+        return new RegisterResponse(
+                saved.getId(),
+                saved.getFirstName(),
+                saved.getEmail(),
+                saved.getPhone(),
+                saved.getRole().name(),
+                "Registered Successfully"
+        );
     }
 
     public User login(String email, String password) {
@@ -36,8 +60,9 @@ public class UserService {
             throw new RuntimeException("Wrong password");
         }
         return user;
-
     }
+
+
 }
 
 
