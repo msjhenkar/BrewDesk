@@ -4,7 +4,7 @@ import "../../styles/MenuTable.css"
 
 const MenuTable = ({ items, onEdit, onDelete, loading }) => {
 
-  console.log(items)
+  // console.log(items)
 
   const categoryColors = {
     Coffee: "coffee-badge",
@@ -62,7 +62,7 @@ const MenuTable = ({ items, onEdit, onDelete, loading }) => {
                   {item.imageUrl ? (
                     <img
                       src={item.imageUrl}
-                      alt={item.name}
+                      alt={item.itemName}
                       className='item-image'
                       onError={(e) => {
                         e.target.style.display = "none";
@@ -73,7 +73,7 @@ const MenuTable = ({ items, onEdit, onDelete, loading }) => {
                   )}
 
                   <div>
-                    <p className="item-name">{item.name}</p>
+                    <p className="item-name">{item.itemName}</p>
 
                     {item.description && (
                       <p className="item-description">
@@ -120,7 +120,7 @@ const MenuTable = ({ items, onEdit, onDelete, loading }) => {
 
                   <button
                     onClick={() =>{ 
-                      console.log("edit clicked")
+                      // console.log("edit clicked")
                       onEdit(item)
                     
                     }}
