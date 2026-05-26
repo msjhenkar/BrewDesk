@@ -152,6 +152,13 @@ public class OrderServiceImpl implements OrderService {
 
         resp.setOrderId(order.getOrderId());
         resp.setUserId(order.getUser().getId());
+
+        resp.setUserName(
+                order.getUser().getFirstName()
+                        + (
+                        order.getUser().getLastName() != null ? " " + order.getUser().getLastName() : ""
+                )
+        );
         resp.setTotalAmount(order.getTotalAmount());
         resp.setCreatedAt(order.getCreatedAt());
         resp.setStatus(order.getStatus().name());

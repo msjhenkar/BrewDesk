@@ -5,6 +5,7 @@ import com.cafe.backend.dtos.menu.MenuSearchResponse;
 import com.cafe.backend.entities.MenuItem;
 import com.cafe.backend.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,12 +19,11 @@ public class MenuServiceImple implements MenuService {
 
     @Override
     public MenuItem createMenuItem(MenuItem menuItem) {
-
         return menuRepository.save(menuItem);
     }
 
-    public List<MenuItem> getAllMenuItems() {
-        return menuRepository.findAll();
+    public List<MenuItem> getAllMenuItems(Pageable pageable) {
+        return menuRepository.findAll(pageable).getContent();
     }
 
     public Optional<MenuItem> getMenuItemById(Long id){
