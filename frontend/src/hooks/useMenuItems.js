@@ -11,10 +11,20 @@ import {
 
 export const useMenuItems = () => {
 
-    
+
 
     //  Holds the array of Menu Items fetched from backend
     const [menuItems, setMenuItems] = useState([]);
+
+    const [pageNo, setPageNo] = useState(1);
+
+    const [pageSize, setPageSize] = useState(10);
+
+    const [sortBy, setSortBy] = useState('id');
+
+    const [sortDir, setSortDir] = useState('asc');
+
+    const [isLastPage, setIsLastPage] = useState(false);
 
     const [loading, setLoading] = useState(false);
 
@@ -35,15 +45,15 @@ export const useMenuItems = () => {
         setTimeout(() => setToast({ show: false, message: '', type: '' }), 3000);
     }, []);
 
-     // Helper to normalize backend shape → frontend shape
+    // Helper to normalize backend shape → frontend shape
     // Defined once, reused in both fetch and search
     const normalizeItem = (item) => ({
-        id:          item.id,
-        name:        item.itemName,       // backend "itemName" → frontend "name"
-        price:       item.price,
-        category:    item.category,
+        id: item.id,
+        itemName: item.itemName,       // backend "itemName" → frontend "name"
+        price: item.price,
+        category: item.category,
         description: item.description,
-        imageUrl:    item.imageUrl || '',
+        imageUrl: item.imageUrl || '',
     });
 
     const fetchMenuItems = useCallback(async () => {
@@ -51,8 +61,10 @@ export const useMenuItems = () => {
         setError(null);
 
         try {
-            const response = await getAllMenuItems();
-            setMenuItems(response.data.map(normalizeItem));
+            const response = await getAllMenuItems(pageNo, pageSize, sortBy, sortDir);
+            const items = response.data || [];
+            setMenuItems(items.map(normalizeItem));
+            setIsLastPage(items.length < pageSize);
 
         } catch (error) {
             setError('Failed to load menu Items');
@@ -61,7 +73,7 @@ export const useMenuItems = () => {
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [pageNo, pageSize, sortBy, sortDir]);
 
 
     useEffect(() => {
@@ -72,14 +84,18 @@ export const useMenuItems = () => {
         setSearchKeyword(keyword);
 
         if (!keyword.trim()) {
-            fetchMenuItems();
+            if (pageNo !== 1) {
+                setPageNo(1);
+            } else {
+                fetchMenuItems();
+            }
             return
         }
 
         setLoading(true)
         try {
             const response = await searchMenuItems(keyword);
-            setMenuItems(response.data);
+            setMenuItems(response.data.result.map(normalizeItem));
 
         } catch (error) {
             setError('search Failed');
@@ -113,11 +129,11 @@ export const useMenuItems = () => {
         setLoading(true);
         try {
             const payload = {
-                itemName:    formData.name,
-                price:       formData.price,
-                category:    formData.category,
+                itemName: formData.itemName,
+                price: formData.price,
+                category: formData.category,
                 description: formData.description,
-                imageUrl:    formData.imageUrl,
+                imageUrl: formData.imageUrl,
             };
             await updateMenuItem(editingItem.id, payload);
             await fetchMenuItems();
@@ -167,6 +183,8 @@ export const useMenuItems = () => {
         toast, searchKeyword,
         handleSearch, handleCreate, handleUpdate, handleDelete,
         openEditForm, openCreateForm,
+        pageNo, setPageNo, isLastPage, pageSize, setPageSize,
+        sortBy, setSortBy, sortDir, setSortDir
     };
 
 
