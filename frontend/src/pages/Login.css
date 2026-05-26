@@ -1,0 +1,246 @@
+/* ============================================================
+   Login.css — Simple, neutral, consistent
+   Spacing scale: 8 / 16 / 24 / 32 / 48px
+   Accent:  #b45309  (warm amber, readable on white)
+   Neutral: greys from #f5f5f4 → #1c1917
+   ============================================================ */
+
+/* ---------- Page shell ---------- */
+.login-page {
+  min-height: 100vh;
+  background-color: #F5EFE6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* ---------- Card ---------- */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: #FFFDF9;
+  border: 1px solid #E6DED3;
+  border-radius: 12px;
+  padding: 40px 32px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+}
+
+/* ---------- Brand ---------- */
+.login-brand {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.brand-icon {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.brand-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1c1917;
+  margin: 0;
+}
+
+.brand-subtitle {
+  font-size: 13px;
+  color: #78716c;
+  margin: 4px 0 0;
+}
+
+/* ---------- Heading ---------- */
+.login-header {
+  margin-bottom: 24px;
+}
+
+.login-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1c1917;
+  margin: 0 0 4px;
+}
+
+.login-header p {
+  font-size: 13px;
+  color: #78716c;
+  margin: 0;
+}
+
+/* ---------- Error banner ---------- */
+.error-banner {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+/* ---------- Form ---------- */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---------- Form group ---------- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #44403c;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d6d3d1;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1c1917;
+  background-color: #fafaf9;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.form-group input::placeholder {
+  color: #a8a29e;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #b45309;
+}
+
+/* ---------- Label row (label + forgot link) ---------- */
+.label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ---------- Password field with show/hide toggle ---------- */
+.input-with-toggle {
+  position: relative;
+}
+
+.input-with-toggle input {
+  width: 100%;
+  padding: 10px 52px 10px 12px;
+  border: 1px solid #d6d3d1;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1c1917;
+  background-color: #fafaf9;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.input-with-toggle input::placeholder {
+  color: #a8a29e;
+}
+
+.input-with-toggle input:focus {
+  outline: none;
+  border-color: #b45309;
+}
+
+/* ---------- Forgot / toggle shared text-button style ---------- */
+.forgot-link,
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  color: #b45309;
+  padding: 0;
+}
+
+.forgot-link:hover,
+.toggle-btn:hover {
+  color: #92400e;
+}
+
+.toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ---------- Submit button ---------- */
+.login-btn {
+  width: 100%;
+  padding: 11px;
+  background-color: #b45309;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  transition: background-color 0.15s;
+}
+
+.login-btn:hover:not(:disabled) {
+  background-color: #92400e;
+}
+
+.login-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ---------- Spinner ---------- */
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Sign-up link ---------- */
+.signup-link {
+  text-align: center;
+  font-size: 13px;
+  color: #78716c;
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+
+.signup-link a {
+  color: #b45309;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  color: #92400e;
+}
