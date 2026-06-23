@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +18,13 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("/api/menu")
 public class MenuController {
     @Autowired
     private MenuServiceImple menuService;
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MenuItem> createMenuItem(@RequestBody MenuItem menuItem){
         MenuItem savedItem = menuService.createMenuItem(menuItem);
         return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
@@ -79,6 +81,7 @@ public class MenuController {
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MenuItem> updateMenuItem(@PathVariable Long id, @RequestBody MenuItem menuItem){
         MenuItem updated = menuService.updateMenuItem(id, menuItem);
         return ResponseEntity.ok(updated);

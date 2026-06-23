@@ -7,6 +7,7 @@ import com.cafe.backend.service.order.OrderService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class AdminOrderController {
     }
 
     @GetMapping("/{id}")
+
     public ResponseEntity<OrderResponse> getOrderById(@PathVariable Long id){
         return ResponseEntity.ok(
                 orderService.getOrderById(id)
