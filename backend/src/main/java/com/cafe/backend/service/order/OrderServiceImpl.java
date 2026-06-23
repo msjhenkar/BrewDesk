@@ -136,7 +136,17 @@ public class OrderServiceImpl implements OrderService {
         }
         orderRepo.deleteById(orderId);
     }
-    
+
+    @Override
+    public List<OrderResponse> getOrdersByUserId(Long userId) {
+        List<Order> orders = orderRepo.findByUserId(userId);
+        List<OrderResponse> responses = new ArrayList<>();
+        for (Order order : orders) {
+            responses.add(mapToResponse(order));
+        }
+        return responses;
+    }
+
     private void validateStatusTransition(OrderStatus current, OrderStatus next){
         if(current == OrderStatus.CANCELLED || current == OrderStatus.COMPLETED){
             throw new RuntimeException("order status can't be changed from "+ current);
