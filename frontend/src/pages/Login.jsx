@@ -13,6 +13,8 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+
+
   const handleChange = (e) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     setError('');
@@ -28,7 +30,6 @@ const Login = () => {
       setLoading(true);
       const res = await loginUser(form);
       const userData = res.data;
-      console.log(userData);
       login(userData);
       if (userData.role === 'ADMIN') {
         navigate('/menu', { replace: true });

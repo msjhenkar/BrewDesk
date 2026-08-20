@@ -1,15 +1,7 @@
-import axios from 'axios';
+import api from './api';
 
-const api = axios.create({
-  baseURL: 'http://localhost:8081',
-  headers: { 'Content-Type': 'application/json' },
-});
-
-// POST /api/orders — place order
-// body: { userId, menuItems: [{ menuItemId, quantity }] }
 export const placeOrder = (data) => api.post('/api/orders', data);
 
-// GET /api/orders — all orders (admin)
 export const getAllOrders = () => api.get('/api/orders');
 
 // GET /api/orders/:id — one order

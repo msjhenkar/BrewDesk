@@ -2,7 +2,10 @@ import React, { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext(null);
 
-const STORAGE_KEY = 'brewdesk_user';
+const USER_KEY = 'brewdesk_user';
+const TOKEN_KEY = 'token';
+
+// const STORAGE_KEY = 'brewdesk_user';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
@@ -16,19 +19,22 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     // store what backend returns: id, firstName, email, phone, role
+    console.log('AUTHCONTEXT LOGIN:', userData);
     const payload = {
-      id:        userData.id,
+      id: userData.id,
       firstName: userData.firstName,
-      email:     userData.email,
-      phone:     userData.phone,
-      role:      userData.role,
+      email: userData.email,
+      phone: userData.phone,
+      role: userData.role,
     };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    localStorage.setItem(USER_KEY, JSON.stringify(payload));
+    localStorage.setItem(TOKEN_KEY, userData.token); // <-- the missing piece
     setUser(payload);
   };
 
   const logout = () => {
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(USER_KEY);
+    localStorage.removeItem(TOKEN_KEY)
     setUser(null);
   };
 
