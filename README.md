@@ -156,7 +156,7 @@ PENDING → CONFIRMED → PREPARING → READY → DELIVERED
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/cafe-management.git
+   git clone https://github.com/msjhenkar/cafe-management.git
    cd cafe-management
    ```
 
